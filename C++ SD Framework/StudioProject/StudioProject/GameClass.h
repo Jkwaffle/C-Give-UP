@@ -19,7 +19,8 @@ enum keyIndex {
 
 enum GameState {
 	State_InGame,
-	State_Paused,
+	State_Paused_continue,
+	State_Paused_quit,
 	State_Menu,
 	State_GameOver,
 
@@ -46,14 +47,16 @@ void RenderMenu();
 void RenderCharacter();
 void RenderMap();
 void RenderGameOver();
-void RenderPaused();
+void C_RenderPaused();
+void Q_RenderPaused();
 void rendercredits();
 void rendervictory();
 
 
 void MenuLogic();
 void InGameLogic();
-void PausedLogic();
+void C_PausedLogic();
+void Q_PausedLogic();
 void GameOverLogic();
 void creditsLogic();
 void victoryLogic();

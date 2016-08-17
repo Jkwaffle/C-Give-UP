@@ -61,8 +61,11 @@ void Update(double dTime){
 	case State_InGame:
 		InGameLogic();
 		break;
-	case State_Paused:
-		PausedLogic();
+	case State_Paused_continue:
+		C_PausedLogic();
+		break;
+	case State_Paused_quit:
+		Q_PausedLogic();
 		break;
 	case State_GameOver:
 		GameOverLogic();
@@ -89,16 +92,41 @@ void InGameLogic(){
 		return;
 	}
 	if (keyPressed[Key_Escape]){
-		curGameState = State_Paused;
+		curGameState = State_Paused_continue;
 		SetBounceTime(0.5);
 	}
 }
-void PausedLogic(){
-	if (KeyBounceTime > elapsedTime){
+void C_PausedLogic() {
+	if (KeyBounceTime > elapsedTime) {
 		return;
 	}
-	if (keyPressed[Key_Space]){
+	if (keyPressed[Key_Space]) {
+		curGameState = State_InGame;
+		SetBounceTime(0.5);
+	}
+	if (keyPressed[Key_Down]) {
+		curGameState = State_Paused_quit;
+		SetBounceTime(0.5);
+	}
+	if (keyPressed[Key_Up]) {
+		curGameState = State_Paused_quit;
+		SetBounceTime(0.5);
+	}
+}
+void Q_PausedLogic() {
+	if (KeyBounceTime > elapsedTime) {
+		return;
+	}
+	if (keyPressed[Key_Space]) {
 		curGameState = State_GameOver;
+		SetBounceTime(0.5);
+	}
+	if (keyPressed[Key_Down]) {
+		curGameState = State_Paused_continue;
+		SetBounceTime(0.5);
+	}
+	if (keyPressed[Key_Up]) {
+		curGameState = State_Paused_continue;
 		SetBounceTime(0.5);
 	}
 }
@@ -145,8 +173,11 @@ void Render(){
 		RenderMap();
 		RenderCharacter();
 		break;
-	case State_Paused:
-		RenderPaused();
+	case State_Paused_continue:
+		C_RenderPaused();
+		break;
+	case State_Paused_quit:
+		Q_RenderPaused();
 		break;
 	case State_GameOver:
 		RenderGameOver();
@@ -209,7 +240,20 @@ void RenderGameOver(){
 	gameConsole.writeToBuffer(c, "your death count?", 0x03);
 
 }
-void RenderPaused(){
+void C_RenderPaused() {
+	COORD c = gameConsole.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Pause", 0x03);
+	c.Y += 5;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, ">Continue<", 0x03);
+	c.Y += 1;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Quit", 0x03);
+
+}
+void Q_RenderPaused() {
 	COORD c = gameConsole.getConsoleSize();
 	c.Y /= 3;
 	c.X = c.X / 2 - 9;
@@ -219,10 +263,9 @@ void RenderPaused(){
 	gameConsole.writeToBuffer(c, "Continue", 0x03);
 	c.Y += 1;
 	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Quit", 0x03);
+	gameConsole.writeToBuffer(c, ">Quit<", 0x03);
 
 }
-
 void renderToScreen(){
 	gameConsole.flushBufferToConsole();
 }
