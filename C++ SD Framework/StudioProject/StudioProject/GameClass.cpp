@@ -6,18 +6,16 @@
 #include <iomanip>
 #include <sstream>
 
-//Time passed
 double elapsedTime;
 double deltaTime;
 bool keyPressed[Key_None];
 
 // Game Var Here
-PlayerClass playerChar;		
+PlayerClass playerChar;
 GameState curGameState = State_Menu;
-//Prevents Key bouncing
-double KeyBounceTime;		
+double KeyBounceTime;		//Prevents Key bouncing
 
-Console gameConsole(120, 60, "Give Up: Console ver");	//Creates the console(sizeX,sizeY,Title)
+Console gameConsole(120, 30, "Give Up: Console ver");	//Creates the console(sizeX,sizeY,Title)(SIZE MAY CAUSE ISSUES)
 
 
 //Init(): Function that initialize all necessary variables
@@ -36,7 +34,7 @@ void Init(){
 //Shutdown(): Clear memory before exiting
 void ShutDown(){
 	//not sure if necessary
-	colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+	//colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 	gameConsole.clearBuffer();
 }
 
@@ -52,7 +50,6 @@ void getInput(){
 
 //Main Update Loop
 void Update(double dTime){
-	
 	elapsedTime += dTime;	//Time passed
 	deltaTime = dTime;		//Used to Render later
 
@@ -69,6 +66,10 @@ void Update(double dTime){
 		break;
 	case State_GameOver:
 		GameOverLogic();
+		break;
+	case S_CREDITS: creditsLogic();
+		break;
+	case S_VICTORY: victoryLogic();
 		break;
 	}
 }
@@ -87,7 +88,7 @@ void InGameLogic(){
 	if (KeyBounceTime > elapsedTime){
 		return;
 	}
-	if (keyPressed[Key_Space]){
+	if (keyPressed[Key_Escape]){
 		curGameState = State_Paused;
 		SetBounceTime(0.5);
 	}
@@ -106,6 +107,24 @@ void GameOverLogic(){
 		return;
 	}
 	if (keyPressed[Key_Space]){
+		curGameState = S_CREDITS;
+		SetBounceTime(0.5);
+	}
+}
+void creditsLogic() {
+	if (KeyBounceTime > elapsedTime) {
+		return;
+	}
+	if (keyPressed[Key_Space]) {
+		curGameState = S_VICTORY;
+		SetBounceTime(0.5);
+	}
+}
+void victoryLogic() {
+	if (KeyBounceTime > elapsedTime) {
+		return;
+	}
+	if (keyPressed[Key_Space]) {
 		curGameState = State_Menu;
 		SetBounceTime(0.5);
 	}
@@ -132,6 +151,10 @@ void Render(){
 	case State_GameOver:
 		RenderGameOver();
 		break;
+	case S_CREDITS: rendercredits();
+		break;
+	case S_VICTORY: rendervictory();
+		break;
 	}
 	renderElapsedTime();
 	renderFrameRate();
@@ -140,15 +163,16 @@ void Render(){
 //Functions used in Render
 #pragma region RenderRegion 
 void RenderMenu(){
-	COORD c;
-
-	c.X = 20;
-	c.Y = 0;
-	std::ostringstream ss;
-	ss << "Render Menu Selected";
-
-	gameConsole.writeToBuffer(c, ss.str());
-	
+	COORD c = gameConsole.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	gameConsole.writeToBuffer(c, "GIVE UP", 0x03);
+	c.Y += 1;
+	c.X = gameConsole.getConsoleSize().X / 2 - 20;
+	gameConsole.writeToBuffer(c, "Press <Space> to interact", 0x03);
+	c.Y += 1;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Press 'Esc' to go menu", 0x03);
 }
 void RenderCharacter(){
 	COORD c;
@@ -173,25 +197,29 @@ void RenderMap(){
 
 }
 void RenderGameOver(){
-	COORD c;
-
-	c.X = 20;
-	c.Y = 0;
-	std::ostringstream ss;
-	ss << "Render GameOver Selected";
-
-	gameConsole.writeToBuffer(c, ss.str());
+	COORD c = gameConsole.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Game Over", 0x03);
+	c.Y += 5;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "You Finally Gave UP", 0x03);
+	c.Y += 1;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "your death count?", 0x03);
 
 }
 void RenderPaused(){
-	COORD c;
-
-	c.X = 20;
-	c.Y = 0;
-	std::ostringstream ss;
-	ss << "Render Paused Selected";
-
-	gameConsole.writeToBuffer(c, ss.str());
+	COORD c = gameConsole.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Pause", 0x03);
+	c.Y += 5;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Continue", 0x03);
+	c.Y += 1;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Quit", 0x03);
 
 }
 
@@ -216,13 +244,41 @@ void renderElapsedTime(){
 	ss << elapsedTime << "secs";
 	c.X = 0;
 	c.Y = 0;
-	gameConsole.writeToBuffer(c, ss.str(), 0x0f);
+	gameConsole.writeToBuffer(c, ss.str(), 0x59);
 }
 void clearScreen(){
 	//Clear screen with black
-	gameConsole.clearBuffer(0x00);
+	gameConsole.clearBuffer(0x1F);
 }
 
+void rendercredits() 
+{
+	COORD c = gameConsole.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	gameConsole.writeToBuffer(c, "Credits", 0x03);
+	c.Y += 5;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "blah", 0x03);
+	c.Y += 1;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "blah", 0x03);
+}
+
+
+void rendervictory()  
+{
+	COORD c = gameConsole.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	gameConsole.writeToBuffer(c, "YOU WON?!?!", 0x03);
+	c.Y += 5;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "CONGRATS", 0x03);
+	c.Y += 1;
+	c.X = gameConsole.getConsoleSize().X / 2 - 9;
+	gameConsole.writeToBuffer(c, "your death count?", 0x03);
+}
 
 #pragma endregion RenderRegion
 //End of Render functions
