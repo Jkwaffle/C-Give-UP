@@ -15,12 +15,14 @@
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="GameClass.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuController.cpp" />
     <ClCompile Include="PlayerClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="GameClass.h" />
+    <ClInclude Include="MenuController.h" />
     <ClInclude Include="PlayerClass.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

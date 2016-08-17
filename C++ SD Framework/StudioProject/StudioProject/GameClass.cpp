@@ -6,16 +6,18 @@
 #include <iomanip>
 #include <sstream>
 
+//Time passed
 double elapsedTime;
 double deltaTime;
 bool keyPressed[Key_None];
 
 // Game Var Here
-PlayerClass playerChar;
+PlayerClass playerChar;		
 GameState curGameState = State_Menu;
-double KeyBounceTime;		//Prevents Key bouncing
+//Prevents Key bouncing
+double KeyBounceTime;		
 
-Console gameConsole(120, 60, "Give Up: Console ver");	//Creates the console(sizeX,sizeY,Title)(SIZE MAY CAUSE ISSUES)
+Console gameConsole(120, 60, "Give Up: Console ver");	//Creates the console(sizeX,sizeY,Title)
 
 
 //Init(): Function that initialize all necessary variables
@@ -34,7 +36,7 @@ void Init(){
 //Shutdown(): Clear memory before exiting
 void ShutDown(){
 	//not sure if necessary
-	//colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+	colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 	gameConsole.clearBuffer();
 }
 
@@ -50,6 +52,7 @@ void getInput(){
 
 //Main Update Loop
 void Update(double dTime){
+	
 	elapsedTime += dTime;	//Time passed
 	deltaTime = dTime;		//Used to Render later
 
@@ -213,11 +216,11 @@ void renderElapsedTime(){
 	ss << elapsedTime << "secs";
 	c.X = 0;
 	c.Y = 0;
-	gameConsole.writeToBuffer(c, ss.str(), 0x59);
+	gameConsole.writeToBuffer(c, ss.str(), 0x0f);
 }
 void clearScreen(){
 	//Clear screen with black
-	gameConsole.clearBuffer(0x1F);
+	gameConsole.clearBuffer(0x00);
 }
 
 

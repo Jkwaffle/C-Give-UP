@@ -13,6 +13,7 @@ void mainLoop();
 int main(){
 
 	mainLoop();
+	ShutDown();
 }
 
 void mainLoop(){

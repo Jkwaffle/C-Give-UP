@@ -30,7 +30,7 @@ void Init();
 void getInput();
 void Update(double dTime);
 void Render();
-void Shutdown();
+void ShutDown();
 void SetBounceTime(float delay);
 
 //Used in render
