@@ -3,6 +3,7 @@
 
 #pragma comment(lib, "winmm.lib")
 
+//Test If Commit is successful
 bool exitGame= false;
 CStopWatch gameTimer;
 const unsigned char gc_ucFPS = 100;
