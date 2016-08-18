@@ -3,11 +3,12 @@
 #include <vector>
 using namespace std;
 
+
 class MapGenerator //: LevelController
 {
 public:
 	void BufferMap(std::string Stage);
-	vector<COORD> wallpos;
+	static vector<COORD> wallpos;
 
 
 private:

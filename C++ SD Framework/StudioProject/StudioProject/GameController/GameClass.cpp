@@ -2,7 +2,7 @@
 #include "../Framework/console.h"
 #include "../LevelGenerator/LevelController.h"
 #include "../LevelGenerator/MapGenerator.h"
-
+#include "PlayerClass.h"
 
 #include <iostream>
 #include <iomanip>
@@ -11,9 +11,11 @@
 //Console Directly linked to GameClass.H
 Console GameClass::gameConsole(120, 60, "Give Up: Console ver!!");
 //gameController to copy and use variables
+
 GameClass gameController;
 LevelController levelGetter;
 MapGenerator mapGenObj;
+PlayerClass player;
 
 bool GameClass::keyPressed[Key_None];
 
@@ -22,6 +24,9 @@ void Init(){
 	//GameClass::curGameState = State_InGame;
 	gameController.elapsedTime = 0.0;
 	gameController.deltaTime = 0.0;
+	
+	player.gameChar.playerPos.X = 2;
+	player.gameChar.playerPos.Y = 14;
 }
 void getInput(){
 	GameClass::keyPressed[Key_Up] = isKeyPressed(VK_UP);
@@ -72,6 +77,7 @@ void Render(){
 	gameController.renderFrameRate();
 	gameController.renderToScreen();
 }
+
 void Shutdown(){
 	GameClass::gameConsole.clearBuffer();
 }
@@ -83,6 +89,7 @@ void GameClass::InGameLogic(){
 	if (keyPressed[Key_Space]){
 		gameController.AddLevel();
 	}
+	player.CharacterMovement();
 }
 void GameClass::GameOverLogic(){
 
@@ -98,9 +105,9 @@ void GameClass::RenderMenu(){
 }
 void GameClass::RenderInGame(){
 
-	mapGenObj.BufferMap(levelGetter.GenerateLevelIndex(curLevel));		//MapGenObj Buffers
-																		//LevelGetter.GenerateLevelIndex Returns sting path of level
-																		// curLevel = current level in GameClass
+	mapGenObj.BufferMap(levelGetter.GenerateLevelIndex(curLevel));	//MapGenObj Buffers
+	player.GenerateCharacter();										//LevelGetter.GenerateLevelIndex Returns sting path of level
+																	// curLevel = current level in GameClass
 }
 void GameClass::RenderPaused(){
 

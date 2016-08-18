@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
+    <ClCompile Include="GameController\PlayerClass.cpp" />
     <ClCompile Include="LevelGenerator\LevelController.cpp" />
     <ClCompile Include="LevelGenerator\MapGenerator.cpp" />
     <ClCompile Include="main.cpp" />
@@ -21,6 +22,7 @@
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
+    <ClInclude Include="GameController\PlayerClass.h" />
     <ClInclude Include="LevelGenerator\LevelController.h" />
     <ClInclude Include="LevelGenerator\MapGenerator.h" />
     <ClInclude Include="GameController\GameClass.h" />

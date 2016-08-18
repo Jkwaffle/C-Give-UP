@@ -26,6 +26,10 @@ void Render();
 void Shutdown();
 //void SetBounceTime(float delay);
 
+//----------------------------
+//void CharacterMovement();
+//void Generate_Character();
+//----------------------------
 
 class GameClass{
 public:

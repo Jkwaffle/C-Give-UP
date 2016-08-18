@@ -10,7 +10,7 @@ using namespace std;
 static const int WIDTH = 90;
 static const int HEIGHT = 36;//map size
 char level[HEIGHT][WIDTH];
-vector<COORD> wallpos; //getting position of walls
+//vector<COORD> wallpos;//getting position of walls
 
 
 void MapGenerator::BufferMap(std::string Stage){
@@ -49,7 +49,7 @@ void MapGenerator::BufferMap(std::string Stage){
 			}
 			else if (level[j][i] == '>')
 			{
-				gameController.AddLevel();
+				//gameController.AddLevel();
 				GameClass::gameConsole.writeToBuffer(c, '>');
 			}
 			else if (level[j][i] == 'x')
@@ -57,7 +57,7 @@ void MapGenerator::BufferMap(std::string Stage){
 				COORD temp_wall;
 				temp_wall.X = i;
 				temp_wall.Y = j + 1;
-				wallpos.push_back(temp_wall);
+				MapGenerator::wallpos.push_back(temp_wall);
 				GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
 			}
 		}
