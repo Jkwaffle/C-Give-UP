@@ -1,59 +1,54 @@
 #include "GameClass.h"
 #include "PlayerClass.h"
 #include "Framework\console.h"
+#include "PausedMenuController.h"
 
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 
-double elapsedTime;
-double deltaTime;
-bool keyPressed[Key_None];
 
-// Game Var Here
-PlayerClass playerChar;
-GameState curGameState = State_Menu;
-double KeyBounceTime;		//Prevents Key bouncing
+#pragma region InitVar
 
-Console gameConsole(120, 30, "Give Up: Console ver");	//Creates the console(sizeX,sizeY,Title)(SIZE MAY CAUSE ISSUES)
+double GameClass::elapsedTime;
+double GameClass::deltaTime;
+bool GameClass::keyPressed[Key_None];
+
+GameState GameClass::curGameState;
+double GameClass::KeyBounceTime;		//Prevents Key bouncing
+
+Console GameClass::gameConsole(120, 60, "Give Up: Console ver!!");	//Creates the console(sizeX,sizeY,Title)(SIZE MAY CAUSE ISSUES)
 
 
+#pragma endregion 
 //Init(): Function that initialize all necessary variables
+PausedMenuController PausedMenuObj;
 void Init(){
-	elapsedTime = 0.0;		//Time passed
-	KeyBounceTime = 0.0;
-	curGameState = State_Menu;
-
-	//Set player pos at bottom right
-	playerChar.playerPos.X = 3;
-	playerChar.playerPos.Y = gameConsole.getMaxConsoleSize().Y - 3;
-	playerChar.isActive = false;
-
+	GameClass::elapsedTime = 0.0;		//Time passed
+	GameClass::KeyBounceTime = 0.0;
+	GameClass::curGameState = State_Menu;
 }
 
 //Shutdown(): Clear memory before exiting
 void ShutDown(){
-	//not sure if necessary
-	//colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-	gameConsole.clearBuffer();
+	GameClass::gameConsole.clearBuffer();
 }
 
 //void getInput(): Gets player input. Use keyPressed[Key_Up] to check key status
 void getInput(){
-	keyPressed[Key_Up] = isKeyPressed(VK_UP);
-	keyPressed[Key_Down] = isKeyPressed(VK_DOWN);
-	keyPressed[Key_Left] = isKeyPressed(VK_LEFT);
-	keyPressed[Key_Right] = isKeyPressed(VK_RIGHT);
-	keyPressed[Key_Escape] = isKeyPressed(VK_ESCAPE);
-	keyPressed[Key_Space] = isKeyPressed(VK_SPACE);
+	GameClass::keyPressed[Key_Up] = isKeyPressed(VK_UP);
+	GameClass::keyPressed[Key_Down] = isKeyPressed(VK_DOWN);
+	GameClass::keyPressed[Key_Left] = isKeyPressed(VK_LEFT);
+	GameClass::keyPressed[Key_Right] = isKeyPressed(VK_RIGHT);
+	GameClass::keyPressed[Key_Escape] = isKeyPressed(VK_ESCAPE);
+	GameClass::keyPressed[Key_Space] = isKeyPressed(VK_SPACE);
 }
 
 //Main Update Loop
 void Update(double dTime){
-	elapsedTime += dTime;	//Time passed
-	deltaTime = dTime;		//Used to Render later
-
-	switch (curGameState)
+	GameClass::elapsedTime += dTime;	//Time passed
+	GameClass::deltaTime = dTime;		//Used to Render later
+	switch (GameClass::curGameState)
 	{
 	case State_Menu:
 		MenuLogic();
@@ -61,110 +56,76 @@ void Update(double dTime){
 	case State_InGame:
 		InGameLogic();
 		break;
-	case State_Paused_continue:
-		C_PausedLogic();
-		break;
-	case State_Paused_quit:
-		Q_PausedLogic();
+	case State_Paused:
+		PausedMenuObj.PausedMenuLogic();
+		//PausedLogic();
 		break;
 	case State_GameOver:
 		GameOverLogic();
 		break;
-	case S_CREDITS: creditsLogic();
+	case S_CREDITS: 
+		creditsLogic();
 		break;
-	case S_VICTORY: victoryLogic();
+	case S_VICTORY: 
+		victoryLogic();
 		break;
 	}
 }
 #pragma region LogicRegion
 void MenuLogic(){
-	if (KeyBounceTime > elapsedTime){
+	if (GameClass::KeyBounceTime > GameClass::elapsedTime){
 		return;
 	}
-
- 	if (keyPressed[Key_Space]){
+	if (GameClass::keyPressed[Key_Space]){
 		SetBounceTime(0.5);
-		curGameState = State_InGame;
+		GameClass::curGameState = State_InGame;
 	}
 }
 void InGameLogic(){
-	if (KeyBounceTime > elapsedTime){
+	if (GameClass::KeyBounceTime >GameClass::elapsedTime){
 		return;
 	}
-	if (keyPressed[Key_Escape]){
-		curGameState = State_Paused_continue;
+	if (GameClass::keyPressed[Key_Escape]){
+		GameClass::curGameState = State_Paused;
 		SetBounceTime(0.5);
 	}
 }
-void C_PausedLogic() {
-	if (KeyBounceTime > elapsedTime) {
-		return;
-	}
-	if (keyPressed[Key_Space]) {
-		curGameState = State_InGame;
-		SetBounceTime(0.5);
-	}
-	if (keyPressed[Key_Down]) {
-		curGameState = State_Paused_quit;
-		SetBounceTime(0.5);
-	}
-	if (keyPressed[Key_Up]) {
-		curGameState = State_Paused_quit;
-		SetBounceTime(0.5);
-	}
-}
-void Q_PausedLogic() {
-	if (KeyBounceTime > elapsedTime) {
-		return;
-	}
-	if (keyPressed[Key_Space]) {
-		curGameState = State_GameOver;
-		SetBounceTime(0.5);
-	}
-	if (keyPressed[Key_Down]) {
-		curGameState = State_Paused_continue;
-		SetBounceTime(0.5);
-	}
-	if (keyPressed[Key_Up]) {
-		curGameState = State_Paused_continue;
-		SetBounceTime(0.5);
-	}
-}
+
 void GameOverLogic(){
-	if (KeyBounceTime > elapsedTime){
+	if (GameClass::KeyBounceTime > GameClass::elapsedTime){
 		return;
 	}
-	if (keyPressed[Key_Space]){
-		curGameState = S_CREDITS;
+	if (GameClass::keyPressed[Key_Space]){
+		GameClass::curGameState = S_CREDITS;
 		SetBounceTime(0.5);
 	}
 }
 void creditsLogic() {
-	if (KeyBounceTime > elapsedTime) {
+	if (GameClass::KeyBounceTime > GameClass::elapsedTime) {
 		return;
 	}
-	if (keyPressed[Key_Space]) {
-		curGameState = S_VICTORY;
+	if (GameClass::keyPressed[Key_Space]) {
+		GameClass::curGameState = S_VICTORY;
 		SetBounceTime(0.5);
 	}
 }
 void victoryLogic() {
-	if (KeyBounceTime > elapsedTime) {
+	if (GameClass::KeyBounceTime > GameClass::elapsedTime) {
 		return;
 	}
-	if (keyPressed[Key_Space]) {
-		curGameState = State_Menu;
+	if (GameClass::keyPressed[Key_Space]) {
+		GameClass::curGameState = State_Menu;
 		SetBounceTime(0.5);
 	}
 }
 void SetBounceTime(float delay){
-	KeyBounceTime = elapsedTime + delay;
+	GameClass::KeyBounceTime = GameClass::elapsedTime + delay;
 }
 #pragma endregion 
 void Render(){
 	clearScreen();
-
-	switch (curGameState)
+	
+	switch (GameClass::curGameState)
 	{
 	case State_Menu:
 		RenderMenu();
@@ -173,18 +134,18 @@ void Render(){
 		RenderMap();
 		RenderCharacter();
 		break;
-	case State_Paused_continue:
-		C_RenderPaused();
-		break;
-	case State_Paused_quit:
-		Q_RenderPaused();
+	case State_Paused:
+		PausedMenuObj.PausedMenuRender();
+		//RenderPaused();
 		break;
 	case State_GameOver:
 		RenderGameOver();
 		break;
-	case S_CREDITS: rendercredits();
+	case S_CREDITS: 
+		rendercredits();
 		break;
-	case S_VICTORY: rendervictory();
+	case S_VICTORY: 
+		rendervictory();
 		break;
 	}
 	renderElapsedTime();
@@ -194,16 +155,16 @@ void Render(){
 //Functions used in Render
 #pragma region RenderRegion 
 void RenderMenu(){
-	COORD c = gameConsole.getConsoleSize();
+	COORD c = GameClass::gameConsole.getConsoleSize();
 	c.Y /= 3;
 	c.X = c.X / 2 - 9;
-	gameConsole.writeToBuffer(c, "GIVE UP", 0x03);
+	GameClass::gameConsole.writeToBuffer(c, "GIVE UP", 0x03);
 	c.Y += 1;
-	c.X = gameConsole.getConsoleSize().X / 2 - 20;
-	gameConsole.writeToBuffer(c, "Press <Space> to interact", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 20;
+	GameClass::gameConsole.writeToBuffer(c, "Press <Space> to interact", 0x03);
 	c.Y += 1;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Press 'Esc' to go menu", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 9;
+	GameClass::gameConsole.writeToBuffer(c, "Press 'Esc' to go menu", 0x03);
 }
 void RenderCharacter(){
 	COORD c;
@@ -213,7 +174,7 @@ void RenderCharacter(){
 	std::ostringstream ss;
 	ss << "Render Character/Map Selected";
 
-	gameConsole.writeToBuffer(c, ss.str());
+	GameClass::gameConsole.writeToBuffer(c, ss.str());
 
 }
 void RenderMap(){
@@ -224,103 +185,77 @@ void RenderMap(){
 	std::ostringstream ss;
 	ss << "Render Map Selected";
 
-	gameConsole.writeToBuffer(c, ss.str());
+	GameClass::gameConsole.writeToBuffer(c, ss.str());
 
 }
 void RenderGameOver(){
-	COORD c = gameConsole.getConsoleSize();
+	COORD c = GameClass::gameConsole.getConsoleSize();
 	c.Y /= 3;
 	c.X = c.X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Game Over", 0x03);
+	GameClass::gameConsole.writeToBuffer(c, "Game Over", 0x03);
 	c.Y += 5;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "You Finally Gave UP", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 9;
+	GameClass::gameConsole.writeToBuffer(c, "You Finally Gave UP", 0x03);
 	c.Y += 1;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "your death count?", 0x03);
-
-}
-void C_RenderPaused() {
-	COORD c = gameConsole.getConsoleSize();
-	c.Y /= 3;
-	c.X = c.X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Pause", 0x03);
-	c.Y += 5;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, ">Continue<", 0x03);
-	c.Y += 1;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Quit", 0x03);
-
-}
-void Q_RenderPaused() {
-	COORD c = gameConsole.getConsoleSize();
-	c.Y /= 3;
-	c.X = c.X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Pause", 0x03);
-	c.Y += 5;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Continue", 0x03);
-	c.Y += 1;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, ">Quit<", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 9;
+	GameClass::gameConsole.writeToBuffer(c, "your death count?", 0x03);
 
 }
 void renderToScreen(){
-	gameConsole.flushBufferToConsole();
+	GameClass::gameConsole.flushBufferToConsole();
 }
 void renderFrameRate(){
 	COORD c;
 	// displays the framerate
 	std::ostringstream ss;
 	ss << std::fixed << std::setprecision(3);
-	ss << 1.0 / deltaTime << "fps";
-	c.X = gameConsole.getConsoleSize().X - 9;
+	ss << 1.0 / GameClass::deltaTime << "fps";
+	c.X = GameClass::gameConsole.getConsoleSize().X - 9;
 	c.Y = 0;
-	gameConsole.writeToBuffer(c, ss.str());
+	GameClass::gameConsole.writeToBuffer(c, ss.str());
 }
 void renderElapsedTime(){
 	COORD c;
 	std::ostringstream ss;
 	// displays the elapsed time
 	ss.str("");
-	ss << elapsedTime << "secs";
+	ss << GameClass::elapsedTime << "secs";
 	c.X = 0;
 	c.Y = 0;
-	gameConsole.writeToBuffer(c, ss.str(), 0x59);
+	GameClass::gameConsole.writeToBuffer(c, ss.str(), 0x59);
 }
 void clearScreen(){
 	//Clear screen with black
-	gameConsole.clearBuffer(0x1F);
+	GameClass::gameConsole.clearBuffer(0x1F);
 }
 
 void rendercredits() 
 {
-	COORD c = gameConsole.getConsoleSize();
+	COORD c = GameClass::gameConsole.getConsoleSize();
 	c.Y /= 3;
 	c.X = c.X / 2 - 9;
-	gameConsole.writeToBuffer(c, "Credits", 0x03);
+	GameClass::gameConsole.writeToBuffer(c, "Credits", 0x03);
 	c.Y += 5;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "blah", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 9;
+	GameClass::gameConsole.writeToBuffer(c, "blah", 0x03);
 	c.Y += 1;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "blah", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 9;
+	GameClass::gameConsole.writeToBuffer(c, "blah", 0x03);
 }
 
 
 void rendervictory()  
 {
-	COORD c = gameConsole.getConsoleSize();
+	COORD c = GameClass::gameConsole.getConsoleSize();
 	c.Y /= 3;
 	c.X = c.X / 2 - 9;
-	gameConsole.writeToBuffer(c, "YOU WON?!?!", 0x03);
+	GameClass::gameConsole.writeToBuffer(c, "YOU WON?!?!", 0x03);
 	c.Y += 5;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "CONGRATS", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 9;
+	GameClass::gameConsole.writeToBuffer(c, "CONGRATS", 0x03);
 	c.Y += 1;
-	c.X = gameConsole.getConsoleSize().X / 2 - 9;
-	gameConsole.writeToBuffer(c, "your death count?", 0x03);
+	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 9;
+	GameClass::gameConsole.writeToBuffer(c, "your death count?", 0x03);
 }
 
 #pragma endregion RenderRegion

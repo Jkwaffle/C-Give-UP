@@ -47,7 +47,7 @@ class Console
     public:
         // Constructors, sets the console size and title.
         Console(COORD consoleSize, LPCSTR lpConsoleTitle = 0);
-        Console(unsigned short consoleWidth, unsigned short consoleHeight, LPCSTR lpConsoleTitle = 0);
+		Console(unsigned short consoleWidth, unsigned short consoleHeight, LPCSTR lpConsoleTitle = 0);
         ~Console();
         
         //===================================================================================================

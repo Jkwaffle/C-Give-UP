@@ -1,14 +1,18 @@
 #ifndef _PLAYERCLASS_H
 #define _PLAYERCLASS_H
-#include <windows.h>
 
+#include "GameClass.h"
+#include "MapGenerator.h"
 
 class PlayerClass
 {
 public:
-	COORD playerPos;
-	bool isActive;
-	PlayerClass();
+
+private:
+	void MoveCharacter(bool Key[Key_None]);
+//	COORD playerPos;
+//	bool isActive;
+//	PlayerClass();
 };
 
 #endif

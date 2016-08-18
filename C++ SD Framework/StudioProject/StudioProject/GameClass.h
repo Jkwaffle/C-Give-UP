@@ -2,7 +2,8 @@
 #define _GAMECLASS_H
 
 #include "Framework\timer.h"
-//poop
+#include "Framework\console.h"
+
 //Not sure if necessary...
 //extern CStopWatch g_swTimer;
 //extern bool g_bQuitGame;
@@ -19,16 +20,13 @@ enum keyIndex {
 
 enum GameState {
 	State_InGame,
-	State_Paused_continue,
-	State_Paused_quit,
+	State_Paused,
 	State_Menu,
 	State_GameOver,
 
 	S_CREDITS,
 	S_VICTORY
 };
-
-
 
 void Init();
 void getInput();
@@ -47,19 +45,28 @@ void RenderMenu();
 void RenderCharacter();
 void RenderMap();
 void RenderGameOver();
-void C_RenderPaused();
-void Q_RenderPaused();
+
 void rendercredits();
 void rendervictory();
 
 
 void MenuLogic();
 void InGameLogic();
-void C_PausedLogic();
-void Q_PausedLogic();
+
 void GameOverLogic();
 void creditsLogic();
 void victoryLogic();
 
+class GameClass {
+public:
+	static GameState curGameState;
+
+	static double elapsedTime;
+	static double deltaTime;
+
+	static bool keyPressed[Key_None];
+	static double KeyBounceTime;
+	static Console gameConsole;
+};
 
 #endif
