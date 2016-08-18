@@ -1,17 +1,12 @@
 #pragma once
-#include "LevelController.h"
 #include <vector>
-using namespace std;
-
-class MapGenerator //: LevelController
+#include<windows.h>
+using std::vector;
+class MapGenerator 
 {
 public:
 	void BufferMap(std::string Stage);
 	vector<COORD> wallpos;
-
-
-private:
-
 
 };
 

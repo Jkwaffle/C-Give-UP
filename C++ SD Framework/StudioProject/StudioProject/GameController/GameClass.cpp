@@ -1,7 +1,7 @@
 #include "GameClass.h"
 #include "../Framework/console.h"
 #include "../LevelGenerator/LevelController.h"
-#include "../LevelGenerator/MapGenerator.h"
+
 
 
 #include <iostream>
@@ -12,8 +12,7 @@
 Console GameClass::gameConsole(120, 60, "Give Up: Console ver!!");
 //gameController to copy and use variables
 GameClass gameController;
-LevelController levelGetter;
-MapGenerator mapGenObj;
+LevelController levelGenObj;
 
 bool GameClass::keyPressed[Key_None];
 
@@ -98,9 +97,8 @@ void GameClass::RenderMenu(){
 }
 void GameClass::RenderInGame(){
 
-	mapGenObj.BufferMap(levelGetter.GenerateLevelIndex(curLevel));		//MapGenObj Buffers
-																		//LevelGetter.GenerateLevelIndex Returns sting path of level
-																		// curLevel = current level in GameClass
+	levelGenObj.GenerateLevel(curLevel);
+
 }
 void GameClass::RenderPaused(){
 
@@ -112,7 +110,7 @@ void GameClass::RenderGameOver(){
 #pragma endregion
 #pragma region RenderFunctions(internal)
 void GameClass::clearScreen(){
-	GameClass::gameConsole.clearBuffer(0x1F);
+	GameClass::gameConsole.clearBuffer(0x00);
 }
 void GameClass::renderElapsedTime(){
 	COORD c;

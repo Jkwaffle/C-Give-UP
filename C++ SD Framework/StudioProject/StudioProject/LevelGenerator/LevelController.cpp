@@ -1,24 +1,25 @@
 #include "LevelController.h"
+#include "MapGenerator.h"
 #include <iostream>
 #include <string>
 using namespace std;
 
-string LevelController::GenerateLevelIndex(int Index){
-
-	switch (Index)
-	{
+void LevelController::GenerateLevel(int Index){
+	switch (Index){
 	case 0:
-		return "map/STAGE01.txt";
+		MapGenerator::BufferMap("map/STAGE01.txt");
 		break;
 	case 1:
-		return "map/STAGE02.txt";
+		MapGenerator::BufferMap("map/STAGE02.txt");
+		//return "map/STAGE02.txt";
 		break;
 	case 2:
-		return"map/STAGE03.txt";
+		MapGenerator::BufferMap("map/STAGE03.txt");
+		//return"map/STAGE03.txt";
 		break;
 	default:
-		return"error";
+		MapGenerator::BufferMap("error");
+		//return"error";
 		break;
 	}
-
 }

@@ -17,6 +17,7 @@
     <ClCompile Include="LevelGenerator\MapGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameController\GameClass.cpp" />
+    <ClCompile Include="MenuControllers\PausedMenuController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
@@ -24,6 +25,7 @@
     <ClInclude Include="LevelGenerator\LevelController.h" />
     <ClInclude Include="LevelGenerator\MapGenerator.h" />
     <ClInclude Include="GameController\GameClass.h" />
+    <ClInclude Include="MenuControllers\PausedMenuController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map\STAGE01.txt" />

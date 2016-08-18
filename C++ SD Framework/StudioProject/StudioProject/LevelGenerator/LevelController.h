@@ -1,8 +1,10 @@
 #pragma once
-#include "../GameController/GameClass.h"
-class LevelController : GameClass
+#include "MapGenerator.h"
+
+class LevelController : MapGenerator
 {
 public:
-	std::string GenerateLevelIndex(int Index = 0);
+	void GenerateLevel(int Index = 0);
+	
 };
 
