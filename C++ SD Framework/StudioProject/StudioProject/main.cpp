@@ -1,5 +1,5 @@
 #include "Framework\timer.h"
-#include "GameClass.h"
+#include "GameController\GameClass.h"
 
 #pragma comment(lib, "winmm.lib")
 
@@ -25,4 +25,5 @@ void mainLoop(){
 		Render();
 		gameTimer.waitUntil(gc_ucFrameTime);
 	}
+	Shutdown();
 }

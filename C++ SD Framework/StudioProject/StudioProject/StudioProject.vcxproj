@@ -13,23 +13,22 @@
   <ItemGroup>
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
-    <ClCompile Include="GameClass.cpp" />
-    <ClCompile Include="LevelController.cpp" />
+    <ClCompile Include="LevelGenerator\LevelController.cpp" />
+    <ClCompile Include="LevelGenerator\MapGenerator.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapGenerator.cpp" />
-    <ClCompile Include="MenuController.cpp" />
-    <ClCompile Include="PausedMenuController.cpp" />
-    <ClCompile Include="PlayerClass.cpp" />
+    <ClCompile Include="GameController\GameClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
-    <ClInclude Include="GameClass.h" />
-    <ClInclude Include="LevelController.h" />
-    <ClInclude Include="MapGenerator.h" />
-    <ClInclude Include="MenuController.h" />
-    <ClInclude Include="PausedMenuController.h" />
-    <ClInclude Include="PlayerClass.h" />
+    <ClInclude Include="LevelGenerator\LevelController.h" />
+    <ClInclude Include="LevelGenerator\MapGenerator.h" />
+    <ClInclude Include="GameController\GameClass.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="map\STAGE01.txt" />
+    <Text Include="map\STAGE02.txt" />
+    <Text Include="map\STAGE03.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{63F64C60-91A0-497E-BB4D-489E752D1B6C}</ProjectGuid>
