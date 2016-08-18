@@ -2,6 +2,8 @@
 #include "PlayerClass.h"
 #include "Framework\console.h"
 #include "PausedMenuController.h"
+#include "MapGenerator.h"
+#include "LevelController.h"
 
 #include <iostream>
 #include <iomanip>
@@ -9,7 +11,10 @@
 
 
 #pragma region InitVar
-
+//----------------------------------
+MapGenerator MapGenObj;
+LevelController levelselect;
+//----------------------------------
 double GameClass::elapsedTime;
 double GameClass::deltaTime;
 bool GameClass::keyPressed[Key_None];
@@ -175,7 +180,6 @@ void RenderCharacter(){
 	ss << "Render Character/Map Selected";
 
 	GameClass::gameConsole.writeToBuffer(c, ss.str());
-
 }
 void RenderMap(){
 	COORD c;
@@ -185,8 +189,8 @@ void RenderMap(){
 	std::ostringstream ss;
 	ss << "Render Map Selected";
 
-	GameClass::gameConsole.writeToBuffer(c, ss.str());
-
+	GameClass::gameConsole.writeToBuffer(c, ss.str());	
+	MapGenObj.BufferMap(levelselect.GenerateLevelIndex(0));
 }
 void RenderGameOver(){
 	COORD c = GameClass::gameConsole.getConsoleSize();

@@ -4,8 +4,9 @@ class LevelController : GameClass
 {
 public:
 	int levelIndex = 0;
+	std::string GenerateLevelIndex(int Index = 0);
+
 private:
-	 void GenerateLevelIndex(int levelIndex = 0);
 	 GameClass gameController;
 	
 };

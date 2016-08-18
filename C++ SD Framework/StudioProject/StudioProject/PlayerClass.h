@@ -3,7 +3,7 @@
 
 #include "GameClass.h"
 #include "MapGenerator.h"
-
+/*
 class PlayerClass
 {
 public:
@@ -14,5 +14,5 @@ private:
 //	bool isActive;
 //	PlayerClass();
 };
-
+*/
 #endif
