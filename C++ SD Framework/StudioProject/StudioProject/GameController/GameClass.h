@@ -18,6 +18,7 @@ enum GameState{
 	State_Paused,
 	State_Menu,
 	State_GameOver
+	//add Credits
 };
 void Init();
 void getInput();
@@ -27,9 +28,9 @@ void Shutdown();
 void SetBounceTime(float delay);
 
 
+
 class GameClass{
 public:
-	
 	static bool keyPressed[Key_None];
 	
 	static Console gameConsole;
@@ -83,5 +84,6 @@ private:
 
 #pragma endregion
 };
+
 
 #endif

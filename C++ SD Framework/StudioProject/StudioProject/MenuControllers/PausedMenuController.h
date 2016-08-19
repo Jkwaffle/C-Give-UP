@@ -12,7 +12,7 @@ public:
 	pauseStates curPauseState;
 	void PausedMenuLogic();
 	void PausedMenuRender();
-
+//	GameState curGamestate();
 private:
 	void ContinueSelectLogic();
 	void QuitSelectLogic();

@@ -1,6 +1,5 @@
 ﻿  GameClass.cpp
-c:\users\jan raph\desktop\sp1\c-give-up\c++ sd framework\studioproject\studioproject\gamecontroller\gameclass.cpp(87): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\jan raph\desktop\sp1\c-give-up\c++ sd framework\studioproject\studioproject\gamecontroller\gameclass.cpp(97): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\jan raph\desktop\sp1\c-give-up\c++ sd framework\studioproject\studioproject\gamecontroller\gameclass.cpp(108): warning C4305: 'argument': truncation from 'double' to 'float'
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+c:\users\jan raph\desktop\sp1\c-give-up\c++ sd framework\studioproject\studioproject\gamecontroller\gameclass.cpp(89): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\jan raph\desktop\sp1\c-give-up\c++ sd framework\studioproject\studioproject\gamecontroller\gameclass.cpp(103): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\jan raph\desktop\sp1\c-give-up\c++ sd framework\studioproject\studioproject\gamecontroller\gameclass.cpp(114): warning C4305: 'argument': truncation from 'double' to 'float'
   StudioProject.vcxproj -> C:\Users\Jan Raph\Desktop\SP1\C-Give-UP\C++ SD Framework\StudioProject\StudioProject\Debug\StudioProject.exe

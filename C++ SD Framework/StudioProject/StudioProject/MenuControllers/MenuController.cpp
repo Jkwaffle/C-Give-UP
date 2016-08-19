@@ -8,6 +8,7 @@ MenuController::MenuController() {
 
 }
 //added
+extern GameClass gameController;
 
 //Get Keypress
 //	GameClass::gameConsole.writeToBuffer()
@@ -52,7 +53,9 @@ void MenuController::StartGameSelectLogic() {
 	if (GameClass::keyPressed[Key_Down]) {
 		curMenuState = MenuState_Credits;
 	}
-
+	if (GameClass::keyPressed[Key_Space]) {
+		gameController.SetGameState(State_InGame);
+	}
 }
 void MenuController::CreditsSelectLogic() {
 	//When the current state is at Quit(logic)
@@ -62,7 +65,9 @@ void MenuController::CreditsSelectLogic() {
 	if (GameClass::keyPressed[Key_Down]) {
 		curMenuState = MenuState_Quit;
 	}
-
+	if (GameClass::keyPressed[Key_Space]) {
+	//	gameController.SetGameState(State_Credits);
+	}
 }
 void MenuController::QuitSelectLogic() {
 	//When the current state is at Quit(logic)
@@ -72,7 +77,9 @@ void MenuController::QuitSelectLogic() {
 	if (GameClass::keyPressed[Key_Down]) {
 		curMenuState = MenuState_StartGame;
 	}
-
+	if (GameClass::keyPressed[Key_Space]) {
+	//	gameController.SetGameState(State_Quit);
+	}
 }
 //RENDER
 void MenuController::StartGameSelectRender() {

@@ -14,8 +14,10 @@ PausedMenuController PauseMenuObj;
 //Console Directly linked to GameClass.H
 Console GameClass::gameConsole(120, 30, "Give Up: Console ver!!");
 //gameController to copy and use variables
-GameClass gameController;
+//GameClass gameController;
 LevelController levelGenObj;
+
+GameClass gameController;
 
 bool GameClass::keyPressed[Key_None];
 
@@ -91,8 +93,12 @@ void GameClass::InGameLogic(){
 	{
 		return;
 	}
+	if (keyPressed[Key_Escape]) {
+		gameController.SetGameState(State_Paused);
+	}
 	if (keyPressed[Key_Space]){
 		gameController.AddLevel();
+	
 	}
 	SetBounceTime(0.11);
 }
