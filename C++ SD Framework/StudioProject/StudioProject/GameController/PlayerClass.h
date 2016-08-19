@@ -8,15 +8,18 @@ struct SGameChar
 	bool  isPlayerActive;
 };
 class PlayerClass {
+	
 public:
+	PlayerClass();
+	void SetStartingPos();
 	SGameChar gameChar;
 	void GenerateCharacter();
 	void CharacterMovement();
 
 private:
-
-	//void CharacterMovement();
 	
+	//void CharacterMovement();
+
 };
 
 

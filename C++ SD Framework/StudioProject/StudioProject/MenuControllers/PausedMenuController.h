@@ -1,27 +1,22 @@
 #pragma once
-#include "GameClass.h"
-
-
-
-enum PausedStates {
+enum pauseStates {
 	PauseState_Continue,
-	PausedState_Quit,
+	PauseState_Quit,
 };
-class PausedMenuController : GameClass
+
+class PausedMenuController
 {
+
 public:
 	PausedMenuController();
+	pauseStates curPauseState;
 	void PausedMenuLogic();
 	void PausedMenuRender();
+	//	GameState curGamestate();
 private:
-	
-	void ContinueLogic();
-	void QuitLogic();
+	void ContinueSelectLogic();
+	void QuitSelectLogic();
 
-	void ContinueRender();
-	void QuitRender();
-	GameClass GameController;
-
-	
+	void ContinueSelectRender();
+	void QuitSelectRender();
 };
-

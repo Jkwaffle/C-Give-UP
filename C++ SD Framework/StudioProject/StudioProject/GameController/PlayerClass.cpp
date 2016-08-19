@@ -5,20 +5,28 @@
 
 MapGenerator collisionObj;
 
+PlayerClass::PlayerClass(){
+	SetStartingPos();
+
+}
+void PlayerClass::SetStartingPos(){
+	gameChar.playerPos.X = 14;
+	gameChar.playerPos.Y = 57;
+}
 void PlayerClass::CharacterMovement(){
 
-	bool bSomethingHappened = false;
+
 	//if (g_dBounceTime > g_dElapsedTime)
 	//return;
 	if (GameClass::keyPressed[Key_Up])
 	{
 		gameChar.playerPos.Y--;
-		for each(COORD i in collisionObj.wallpos){//-----To FIX -----
+		for each(COORD i in collisionObj.wallpos){
 			//optimise for later[this is collision]
 			if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.Y++;
 			}
-			bSomethingHappened = true;
+
 		}
 	}
 	if (GameClass::keyPressed[Key_Left])
@@ -29,7 +37,6 @@ void PlayerClass::CharacterMovement(){
 			if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.X++;
 			}
-			bSomethingHappened = true;
 		}
 	}
 	if (GameClass::keyPressed[Key_Down])
@@ -40,7 +47,6 @@ void PlayerClass::CharacterMovement(){
 			if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.Y++;
 			}
-			bSomethingHappened = true;
 		}
 	}
 	if (GameClass::keyPressed[Key_Right])
@@ -51,14 +57,12 @@ void PlayerClass::CharacterMovement(){
 			if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.X++;
 			}
-			bSomethingHappened = true;
 		}
 	}
-
 }
 
-	void PlayerClass::GenerateCharacter(){
+void PlayerClass::GenerateCharacter(){
 
-		GameClass::gameConsole.writeToBuffer(gameChar.playerPos, (char)1, 11);
+	GameClass::gameConsole.writeToBuffer(gameChar.playerPos, (char)1, 11);
 
-	}
+}
