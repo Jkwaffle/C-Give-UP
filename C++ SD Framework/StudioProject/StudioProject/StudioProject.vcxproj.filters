@@ -42,6 +42,9 @@
     <ClCompile Include="MenuControllers\PausedMenuController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameController\PlayerClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="MenuControllers\MenuController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuControllers\PausedMenuController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController\PlayerClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuControllers\MenuController.h">

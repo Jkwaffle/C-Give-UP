@@ -18,15 +18,18 @@ enum GameState{
 	State_Paused,
 	State_Menu,
 	State_GameOver
-	//add Credits
+
 };
 void Init();
 void getInput();
 void Update(double dTime);
 void Render();
 void Shutdown();
-void SetBounceTime(float delay);
 
+
+
+void SetBounceTime(double delay);
+void ResetGame();
 
 
 class GameClass{
@@ -42,7 +45,6 @@ public:
 
 	void clearScreen();
 	void renderFrameRate();
-	void renderElapsedTime();
 	void renderToScreen();
 
 	void RenderMenu();
@@ -54,6 +56,10 @@ public:
 	void InGameLogic();
 	void GameOverLogic();
 	void PausedLogic();
+
+	
+
+
 	
 #pragma region Getters & Setters
 	int getCurLevel(){
@@ -63,12 +69,8 @@ public:
 		curLevel = lvl;
 	}
 	void AddLevel(){
-		if (curLevel < 3)
-			curLevel++;
-		else
-			curLevel = 0;
+		curLevel++;
 	}
-
 	GameState curGameState(){
 		return gamestate;
 	}
@@ -76,14 +78,13 @@ public:
 		gamestate = state;
 	}
 #pragma endregion
-private:
 #pragma region Misc
+	double InGameTime;
+	void renderInGameTime();
+private:
 	int curLevel;
 	GameState gamestate;
 	
-
 #pragma endregion
 };
-
-
 #endif

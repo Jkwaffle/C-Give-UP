@@ -4,10 +4,6 @@ enum MenuState {
 	MenuState_Quit,
 	MenuState_StartGame
 };
-//void MenuLogic();
-//void StartGameLogic();
-//void CreditsLogic();
-//void QuitLogic();
 class MenuController
 {
 public:
@@ -17,8 +13,6 @@ public:
 	void INMenuRender();
 
 private:
-
-	//added
 	void StartGameSelectLogic();
 	void CreditsSelectLogic();
 	void QuitSelectLogic();

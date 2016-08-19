@@ -66,7 +66,7 @@ void MenuController::CreditsSelectLogic() {
 		curMenuState = MenuState_Quit;
 	}
 	if (GameClass::keyPressed[Key_Space]) {
-	//	gameController.SetGameState(State_Credits);
+		//	gameController.SetGameState(State_Credits);
 	}
 }
 void MenuController::QuitSelectLogic() {
@@ -78,7 +78,7 @@ void MenuController::QuitSelectLogic() {
 		curMenuState = MenuState_StartGame;
 	}
 	if (GameClass::keyPressed[Key_Space]) {
-	//	gameController.SetGameState(State_Quit);
+		//	gameController.SetGameState(State_Quit);
 	}
 }
 //RENDER
@@ -169,29 +169,3 @@ void MenuController::QuitSelectRender() {
 	c.X = GameClass::gameConsole.getConsoleSize().X / 2 - 20;
 	GameClass::gameConsole.writeToBuffer(c, ">Quit<", 0x03);
 }
-/*
-void MenuLogic(){
-
-switch (curMenuState){
-case MenuState_StartGame:
-//	StartGameLogic();
-break;
-case MenuState_Credits:
-//	CreditsLogic();
-break;
-case MenuState_Quit:
-//	QuitLogic();
-break;
-
-}
-}
-void StartGameLogic(){
-//Navigation and change GameclassObj.curGameState to State_InGame
-}
-void CreditsLogic(){
-//Navigation and change GameclassObj.curGameState to State_Credits
-}
-void QuitLogic(){
-//Navigation and change main.cpp exit Game to true
-}
-*/
