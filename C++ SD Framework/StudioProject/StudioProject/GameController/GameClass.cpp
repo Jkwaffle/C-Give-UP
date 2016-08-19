@@ -1,15 +1,18 @@
 #include "GameClass.h"
 #include "../Framework/console.h"
 #include "../LevelGenerator/LevelController.h"
+#include "../MenuControllers/PausedMenuController.h"
+#include "../MenuControllers/MenuController.h"
 
 
 
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-
+MenuController MenuObj;
+PausedMenuController PauseMenuObj;
 //Console Directly linked to GameClass.H
-Console GameClass::gameConsole(120, 60, "Give Up: Console ver!!");
+Console GameClass::gameConsole(120, 30, "Give Up: Console ver!!");
 //gameController to copy and use variables
 GameClass gameController;
 LevelController levelGenObj;
@@ -17,7 +20,7 @@ LevelController levelGenObj;
 bool GameClass::keyPressed[Key_None];
 
 void Init(){
-	gameController.SetGameState(State_InGame);
+	gameController.SetGameState(State_Menu);
 	//GameClass::curGameState = State_InGame;
 	gameController.elapsedTime = 0.0;
 	gameController.deltaTime = 0.0;
@@ -76,24 +79,39 @@ void Shutdown(){
 }
 #pragma region GameLogic Functions
 void GameClass::MenuLogic(){
-
+	if (KeyBounceTime>elapsedTime)
+	{
+		return;
+	}
+	MenuObj.INMenuLogic();
+	SetBounceTime(0.11);
 }
 void GameClass::InGameLogic(){
+	if (KeyBounceTime>elapsedTime)
+	{
+		return;
+	}
 	if (keyPressed[Key_Space]){
 		gameController.AddLevel();
 	}
+	SetBounceTime(0.11);
 }
 void GameClass::GameOverLogic(){
 
 }
 void GameClass::PausedLogic(){
-
+	if (KeyBounceTime>elapsedTime)
+	{
+		return;
+	}
+	PauseMenuObj.PausedMenuLogic();
+	SetBounceTime(0.11);
 }
 #pragma endregion
 
 #pragma region RenderFunctions(External)
 void GameClass::RenderMenu(){
-
+	MenuObj.INMenuRender();
 }
 void GameClass::RenderInGame(){
 
@@ -101,8 +119,9 @@ void GameClass::RenderInGame(){
 
 }
 void GameClass::RenderPaused(){
-
+	PauseMenuObj.PausedMenuRender();
 }
+
 void GameClass::RenderGameOver(){
 
 
@@ -135,7 +154,9 @@ void GameClass::renderToScreen(){
 	GameClass::gameConsole.flushBufferToConsole();
 }
 #pragma endregion
-
+void SetBounceTime(float delay) {
+	gameController.KeyBounceTime = gameController.elapsedTime + delay;
+}
 	//void Render(){
 	//	clearScreen();
 	//	

@@ -4,10 +4,11 @@ enum pauseStates {
 	PauseState_Quit,
 };
 
-class PausedMenuController {
+class PausedMenuController
+{
+
+public:
 	PausedMenuController();
-public :
-	
 	pauseStates curPauseState;
 	void PausedMenuLogic();
 	void PausedMenuRender();

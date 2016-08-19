@@ -24,7 +24,7 @@ void getInput();
 void Update(double dTime);
 void Render();
 void Shutdown();
-//void SetBounceTime(float delay);
+void SetBounceTime(float delay);
 
 
 class GameClass{
@@ -37,7 +37,7 @@ public:
 	
 	double elapsedTime;
 	double deltaTime;
-	//double KeyBounceTime;
+	double KeyBounceTime;
 
 	void clearScreen();
 	void renderFrameRate();

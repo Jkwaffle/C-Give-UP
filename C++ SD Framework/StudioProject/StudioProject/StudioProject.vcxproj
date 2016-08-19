@@ -17,6 +17,7 @@
     <ClCompile Include="LevelGenerator\MapGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameController\GameClass.cpp" />
+    <ClCompile Include="MenuControllers\MenuController.cpp" />
     <ClCompile Include="MenuControllers\PausedMenuController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -25,6 +26,7 @@
     <ClInclude Include="LevelGenerator\LevelController.h" />
     <ClInclude Include="LevelGenerator\MapGenerator.h" />
     <ClInclude Include="GameController\GameClass.h" />
+    <ClInclude Include="MenuControllers\MenuController.h" />
     <ClInclude Include="MenuControllers\PausedMenuController.h" />
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
