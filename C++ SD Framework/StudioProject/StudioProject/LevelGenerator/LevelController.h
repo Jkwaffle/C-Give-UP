@@ -4,6 +4,7 @@
 class LevelController : MapGenerator
 {
 public:
+	int curLevel;
 	void GenerateLevel(int Index = 0);
 	
 };

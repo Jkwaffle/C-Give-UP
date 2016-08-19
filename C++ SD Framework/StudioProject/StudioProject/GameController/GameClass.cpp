@@ -113,7 +113,7 @@ void GameClass::InGameLogic(){
 	if (keyPressed[Key_Space]){
 		gameController.AddLevel();
 	}
-	SetBounceTime(0.11);
+	SetBounceTime(0.085);
 	playerChar.CharacterMovement();
 }
 void GameClass::GameOverLogic(){
@@ -135,7 +135,7 @@ void GameClass::RenderMenu(){
 }
 void GameClass::RenderInGame(){
 
-	levelGenObj.GenerateLevel(curLevel);
+	levelGenObj.GenerateLevel(curLevel);//this gets the stage to be generated
 	playerChar.GenerateCharacter();
 	
 }

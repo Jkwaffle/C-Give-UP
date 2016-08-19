@@ -1,0 +1,8 @@
+merge level controler with map gen
+add player death function/collision
+add other obj
+set boolKey[key_none] before/after menu
+level transition
+
+*format LevelController/MapGenerator
+~~~~~~~~~~~~~~~First Milestone Complete!!!~~~~~~

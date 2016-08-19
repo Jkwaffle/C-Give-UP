@@ -10,7 +10,58 @@ using namespace std;
 static const int WIDTH = 90;
 static const int HEIGHT = 36;//map size
 char level[HEIGHT][WIDTH];
-vector<COORD> wallpos; //getting position of walls
+ //getting position of walls
+
+MapGenerator MapGenRef;
+
+ vector<COORD> MapGenerator::wallpos(std::string Stage){
+
+	ifstream file;
+	file.open(Stage);
+
+	if (file.is_open())
+	{
+		while (file.good())
+		{
+			for (int y = 0; y < HEIGHT; y++)
+			{
+				for (int x = 0; x < WIDTH; x++)
+				{
+					file >> level[y][x];
+				}
+			}
+		}
+
+	}
+
+	file.close();
+
+	vector<COORD> temp;
+	COORD disp;//positions the map
+	disp.X = 13;
+	disp.Y = 23;
+	temp.clear();
+
+	for (int j = 0; j < HEIGHT; j++)
+	{
+		for (int i = 0; i < WIDTH; i++)
+		{
+			 if (level[j][i] == 'x')
+				{
+					
+					COORD temp_wall;
+					temp_wall.X = i + 13;
+					temp_wall.Y = j + 23;
+
+					temp.push_back(temp_wall);
+
+					//wallpos.push_back(temp_wall);
+					//CollisionManager::collisionHolder.push_back(temp_wall);
+			}
+		}
+	}
+	return temp;
+}
 
 void MapGenerator::BufferMap(std::string Stage){
 	GameClass gameController;
@@ -55,12 +106,12 @@ void MapGenerator::BufferMap(std::string Stage){
 				gameController.AddLevel();
 				GameClass::gameConsole.writeToBuffer(c, '>');
 			}
+			else if (level[j][i] == 'w')
+			{
+				GameClass::gameConsole.writeToBuffer(c, ' ', 0x4D);
+			}
 			else if (level[j][i] == 'x')
 			{
-				COORD temp_wall;
-				temp_wall.X = i;
-				temp_wall.Y = j + 1;
-				wallpos.push_back(temp_wall);
 				GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
 			}
 		}
