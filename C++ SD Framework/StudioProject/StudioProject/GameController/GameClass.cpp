@@ -21,7 +21,7 @@ PlayerClass playerChar;
 
 void Init(){
 	gameController.SetGameState(State_Menu);
-	//GameClass::curGameState = State_InGame;
+	//GameClass::curGameState = State_Menu;
 	gameController.elapsedTime = 0.0;
 	gameController.deltaTime = 0.0;
 

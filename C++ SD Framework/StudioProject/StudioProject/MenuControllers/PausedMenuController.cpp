@@ -57,7 +57,7 @@ void PausedMenuController::QuitSelectLogic() {
 	}
 	if (GameClass::keyPressed[Key_Space]) {
 
-		gameController.SetGameState(State_GameOver);
+		gameController.SetGameState(State_Menu);
 	}
 	if (GameClass::keyPressed[Key_Escape]) {
 		gameController.SetGameState(State_InGame);
