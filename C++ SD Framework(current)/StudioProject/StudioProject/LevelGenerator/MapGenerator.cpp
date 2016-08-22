@@ -33,27 +33,22 @@ void MapGenerator::GenerateMap(int lvlIndex) {
 
 	case 0:
 		MapGenerator::BufferMap("map/STAGE01.txt");
-		//MapGenerator::wallpos("map/STAGE01.txt");
+		MapGenerator::wallpos("map/STAGE01.txt");
+		//return "map/STAGE01.txt";
 		break;
 	case 1:
 		MapGenerator::BufferMap("map/STAGE02.txt");
-		//MapGenerator::wallpos("map/STAGE02.txt");
+		MapGenerator::wallpos("map/STAGE02.txt");
+		//return "map/STAGE02.txt";
 		break;
 	case 2:
 		MapGenerator::BufferMap("map/STAGE03.txt");
-		//MapGenerator::wallpos("map/STAGE03.txt");
-		break;
-	case 3:
-		MapGenerator::BufferMap("map/STAGE04.txt");
-		break;
-	case 4:
-		MapGenerator::BufferMap("map/STAGE05.txt");
-		break;
-	case 5:
-		MapGenerator::BufferMap("map/STAGE06.txt");
+		MapGenerator::wallpos("map/STAGE03.txt");
+		//return"map/STAGE03.txt";
 		break;
 	default:
-		MapGenerator::BufferMap("map/test.txt");//this is for test.
+		MapGenerator::BufferMap("error");
+		//return"error";
 		break;
 	}
 }
@@ -218,17 +213,17 @@ void MapGenerator::BufferMap(std::string Stage, bool inGame) {
 					GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
 				}
 			}
-			else{//this is for menu
-				if (level[j][i] == '.')//render '.' as blanks(black).
+			else{
+				if (level[j][i] == '.')//the floor
 				{
 					GameClass::gameConsole.writeToBuffer(c, ' ');
 				}
-				else if (level[j][i] == 'x')//render 'x' as green.
+				else if (level[j][i] == 'x')//normal wall(have collision)
 				{
 					GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
 				}
 				else {
-					GameClass::gameConsole.writeToBuffer(c, level[j][i]);//render other symbols/words.
+					GameClass::gameConsole.writeToBuffer(c, level[j][i]);
 				}
 			}
 		}
