@@ -91,5 +91,7 @@ void MenuController::CreditsSelectRender() {
 }
 void MenuController::QuitSelectRender() {
 	mapGenRef.GenerateMenu('q');
-
+}
+void MenuController::GameOverRender() {
+	mapGenRef.GenerateMenu('o');
 }

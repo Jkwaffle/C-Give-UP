@@ -14,6 +14,7 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="GameController\PlayerClass.cpp" />
+    <ClCompile Include="MenuControllers\GameOverController.cpp" />
     <ClCompile Include="LevelGenerator\MapGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameController\GameClass.cpp" />
@@ -24,6 +25,7 @@
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="GameController\PlayerClass.h" />
+    <ClInclude Include="MenuControllers\GameOverController.h" />
     <ClInclude Include="LevelGenerator\MapGenerator.h" />
     <ClInclude Include="GameController\GameClass.h" />
     <ClInclude Include="MenuControllers\MenuController.h" />

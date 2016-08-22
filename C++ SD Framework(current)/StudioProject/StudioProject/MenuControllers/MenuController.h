@@ -20,5 +20,6 @@ private:
 	void StartGameSelectRender();
 	void CreditsSelectRender();
 	void QuitSelectRender();
+	void GameOverRender();
 };
 

@@ -5,7 +5,7 @@ PausedMenuController::PausedMenuController() {
 	curPauseState = PauseState_Continue;
 }
 
-extern GameClass gameController;
+	extern GameClass gameController;
 void PausedMenuController::PausedMenuLogic() {
 
 	switch (PausedMenuController::curPauseState)
@@ -43,9 +43,9 @@ void PausedMenuController::ContinueSelectLogic() {
 	if (GameClass::keyPressed[Key_Space]) {
 		gameController.SetGameState(State_InGame);
 	}
-	if (GameClass::keyPressed[Key_Escape]) {
-		gameController.SetGameState(State_InGame);
-	}
+	//if (GameClass::keyPressed[Key_Escape]) {
+	//	gameController.SetGameState(State_InGame);
+	//}
 }
 void PausedMenuController::QuitSelectLogic() {
 	//When the current state is at Quit(logic)
@@ -56,13 +56,13 @@ void PausedMenuController::QuitSelectLogic() {
 		curPauseState = PauseState_Continue;
 	}
 	if (GameClass::keyPressed[Key_Space]) {
-
-		gameController.SetGameState(State_Menu);
+		if (gameController.curLevel <= 20){
+			gameController.isLost = true;
+			gameController.SetGameState(State_GameOver);
+		}
+		ResetGame();
 	}
-	if (GameClass::keyPressed[Key_Escape]) {
-		gameController.SetGameState(State_InGame);
-
-	}
+	
 }
 //RENDER
 void PausedMenuController::ContinueSelectRender() {
