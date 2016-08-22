@@ -24,7 +24,6 @@ int curLevel = 0;
 void Init(){
 	gameController.SetGameState(State_Menu);
 
-
 	//GameClass::curGameState = State_Menu;
 
 	gameController.elapsedTime = 0.0;
