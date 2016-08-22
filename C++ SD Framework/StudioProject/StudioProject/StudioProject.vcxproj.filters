@@ -30,9 +30,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelGenerator\LevelController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LevelGenerator\MapGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,9 +52,6 @@
     </ClInclude>
     <ClInclude Include="Framework\timer.h">
       <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelGenerator\LevelController.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LevelGenerator\MapGenerator.h">
       <Filter>Header Files</Filter>

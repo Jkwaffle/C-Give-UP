@@ -18,7 +18,7 @@ public:
 	SGameChar gameChar;
 	void GenerateCharacter();
 	void CharacterMovement();
-	//void CharacterCollision();
+	void CharacterKilled();
 	
 
 private:

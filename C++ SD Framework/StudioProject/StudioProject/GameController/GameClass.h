@@ -62,15 +62,20 @@ public:
 
 	
 #pragma region Getters & Setters
-	int getCurLevel(){
-		return curLevel;
+	int curLevel;
+	void AddLevel(){
+		curLevel++;
 	}
-	void SetLevel(int lvl){
+
+	/*int getCurLevel(){
+		return curLevel;
+	}*/
+	/*void SetLevel(int lvl){
 		curLevel = lvl;
 	}
 	void AddLevel(){
 		curLevel++;
-	}
+	}*/
 	GameState curGameState(){
 		return gamestate;
 	}
@@ -82,7 +87,7 @@ public:
 	double InGameTime;
 	void renderInGameTime();
 private:
-	int curLevel;
+	//int curLevel;
 	GameState gamestate;
 	
 #pragma endregion

@@ -15,24 +15,20 @@ void PlayerClass::SetStartingPos(){
 }
 void PlayerClass::CharacterMovement(){
 	std::string stage;
-	//if (g_dBounceTime > g_dElapsedTime)
-	//return;
+
 	if (GameClass::keyPressed[Key_Up])
 	{
 		gameChar.playerPos.Y--;
 		for each(COORD i in  MapGenerator::wallpos(stage)){
-			//optimise for later[this is collision]
 			if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.Y++;
 			}
-
 		}
 	}
 	if (GameClass::keyPressed[Key_Left])
 	{
 		gameChar.playerPos.X--;
 		for each(COORD i in MapGenerator::wallpos(stage)){
-			//optimise for later[this is collision]
 			if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.X++;
 			}
@@ -42,7 +38,6 @@ void PlayerClass::CharacterMovement(){
 	{
 		gameChar.playerPos.Y++;
 		for each(COORD i in MapGenerator::wallpos(stage)){
-			//optimise for later[this is collision]
 			if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.Y--;
 			}
@@ -52,7 +47,6 @@ void PlayerClass::CharacterMovement(){
 	{
 		gameChar.playerPos.X++;
 		for each(COORD i in MapGenerator::wallpos(stage)){
-			//optimise for later[this is collision]
 		if (i.X == gameChar.playerPos.X && i.Y == gameChar.playerPos.Y){
 				gameChar.playerPos.X--;
 			}
@@ -65,10 +59,14 @@ void PlayerClass::GenerateCharacter(){
 	GameClass::gameConsole.writeToBuffer(gameChar.playerPos, (char)1, 11);
 
 }
+void PlayerClass:: CharacterKilled(){
 
-/*void PlayerClass::CharacterCollision(){
+	PlayerClass::SetStartingPos();
+}
+void PlayerClass::GenerateCharacter(){
+	
+	PlayerClass::SetStartingPos();
 
-	ifstream myfile;
-	myfile.open();
 
-}*/
+
+}
