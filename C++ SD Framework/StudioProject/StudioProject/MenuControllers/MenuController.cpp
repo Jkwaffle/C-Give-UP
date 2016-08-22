@@ -9,7 +9,7 @@ MenuController::MenuController() {
 }
 //added
 extern GameClass gameController;
-
+extern bool exitGame;
 //Get Keypress
 //	GameClass::gameConsole.writeToBuffer()
 
@@ -78,7 +78,7 @@ void MenuController::QuitSelectLogic() {
 		curMenuState = MenuState_StartGame;
 	}
 	if (GameClass::keyPressed[Key_Space]) {
-		//	gameController.SetGameState(State_Quit);
+		exitGame = true;
 	}
 }
 //RENDER
