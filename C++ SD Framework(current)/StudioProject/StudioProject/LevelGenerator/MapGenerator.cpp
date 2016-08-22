@@ -191,40 +191,29 @@ void MapGenerator::BufferMap(std::string Stage, bool inGame) {
 		for (int i = 0; i < WIDTH; i++)
 		{
 			c.X = i + disp.X;
-			if (inGame){
-				if (level[j][i] == '.')//the floor
-				{
-					GameClass::gameConsole.writeToBuffer(c, ' ');
-				}
-				else if (level[j][i] == '>')//to next level
-				{
-					GameClass::gameConsole.writeToBuffer(c, '>');
-				}
-				else if (level[j][i] == 'w')//danger wall(have collision)
-				{
-					GameClass::gameConsole.writeToBuffer(c, ' ', 0x4D);
-				}
-				else if (level[j][i] == 's')//safe wall
-				{
-					GameClass::gameConsole.writeToBuffer(c, ' ', 0x3C);
-				}
-				else if (level[j][i] == 'x')//normal wall(have collision)
-				{
-					GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
-				}
+			if (level[j][i] == '.')//the floor
+			{
+				GameClass::gameConsole.writeToBuffer(c, ' ');
 			}
-			else{
-				if (level[j][i] == '.')//the floor
-				{
-					GameClass::gameConsole.writeToBuffer(c, ' ');
-				}
-				else if (level[j][i] == 'x')//normal wall(have collision)
-				{
-					GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
-				}
-				else {
-					GameClass::gameConsole.writeToBuffer(c, level[j][i]);
-				}
+			else if (level[j][i] == '>')//to next level
+			{
+				GameClass::gameConsole.writeToBuffer(c, '>');
+			}
+			else if (level[j][i] == 'w')//danger wall(have collision)
+			{
+				GameClass::gameConsole.writeToBuffer(c, ' ', 0x4D);
+			}
+			else if (level[j][i] == 's')//safe wall
+			{
+				GameClass::gameConsole.writeToBuffer(c, ' ', 0x3C);
+			}
+			else if (level[j][i] == 'x')//normal wall(have collision)
+			{
+				GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
+			}
+			else
+			{
+				GameClass::gameConsole.writeToBuffer(c, level[j][i], 0x2B);
 			}
 		}
 	}
