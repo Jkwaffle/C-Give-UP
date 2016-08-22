@@ -37,7 +37,7 @@ public:
 	static bool keyPressed[Key_None];
 	
 	static Console gameConsole;
-
+	bool isLost = false;
 	
 	double elapsedTime;
 	double deltaTime;

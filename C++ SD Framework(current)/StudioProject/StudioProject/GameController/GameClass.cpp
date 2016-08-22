@@ -3,13 +3,17 @@
 #include "../LevelGenerator/MapGenerator.h"
 #include "../MenuControllers/MenuController.h"
 #include "../MenuControllers/PausedMenuController.h"
+#include "../MenuControllers/GameOverController.h"
 #include "PlayerClass.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-//Test
+
+bool isLost = false;
+
 MapGenerator MapObj;
 MenuController MenuObj;
+GameOverController afterGameObj;
 PausedMenuController PauseMenuObj;
 //Console Directly linked to GameClass.H
 Console GameClass::gameConsole(120, 60, "Give Up: Console ver!!");
@@ -83,14 +87,15 @@ void Shutdown(){
 	GameClass::gameConsole.clearBuffer();
 }
 void ResetGame(){
-	curLevel = 0;
-	gameController.SetGameState(State_Menu);
+	gameController.curLevel = 0;
+//	gameController.SetGameState(State_Menu);
 
 	gameController.InGameTime = 0.0;
 	gameController.elapsedTime = 0.0;
 	gameController.deltaTime = 0.0;
 	//Dafault Position
 	playerChar.SetStartingPos();
+	
 	
 }
 #pragma region GameLogic Functions
@@ -115,7 +120,12 @@ void GameClass::InGameLogic(){
 	playerChar.CharacterMovement();
 }
 void GameClass::GameOverLogic(){
-
+	if (KeyBounceTime>elapsedTime){
+		return;
+	}
+	
+	afterGameObj.GameOverLogic();
+	SetBounceTime(5.0f);
 }
 void GameClass::PausedLogic(){
 	
@@ -133,14 +143,14 @@ void GameClass::RenderMenu(){
 	MenuObj.INMenuRender();
 }
 void GameClass::RenderInGame(){
-	MapObj.GenerateMap(curLevel);
+	MapObj.GenerateMap(gameController.curLevel);
 	playerChar.GenerateCharacter();
 }
 void GameClass::RenderPaused(){
 	PauseMenuObj.PausedMenuRender();
 }
 void GameClass::RenderGameOver(){
-
+	afterGameObj.GameOverRender();
 
 }
 #pragma endregion
