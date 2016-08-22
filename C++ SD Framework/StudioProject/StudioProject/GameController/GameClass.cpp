@@ -1,6 +1,6 @@
 #include "GameClass.h"
 #include "../Framework/console.h"
-#include "../LevelGenerator/LevelController.h"
+#include "../LevelGenerator/MapGenerator.h"
 #include "../MenuControllers/MenuController.h"
 #include "../MenuControllers/PausedMenuController.h"
 #include "PlayerClass.h"
@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <sstream>
 
+MapGenerator MapObj;
 MenuController MenuObj;
 PausedMenuController PauseMenuObj;
 //Console Directly linked to GameClass.H
@@ -15,17 +16,15 @@ Console GameClass::gameConsole(120, 60, "Give Up: Console ver!!");
 //gameController to copy and use variables
 GameClass gameController;
 
-LevelController levelGenObj;
+
 bool GameClass::keyPressed[Key_None];
 PlayerClass playerChar;
+int curLevel = 0;
 
 void Init(){
 	gameController.SetGameState(State_Menu);
-	//GameClass::curGameState = State_InGame;
 	gameController.elapsedTime = 0.0;
 	gameController.deltaTime = 0.0;
-
-
 }
 void getInput(){
 	GameClass::keyPressed[Key_Up] = isKeyPressed(VK_UP);
@@ -79,9 +78,8 @@ void Render(){
 void Shutdown(){
 	GameClass::gameConsole.clearBuffer();
 }
-
 void ResetGame(){
-	gameController.SetLevel(0);
+	curLevel = 0;
 	gameController.SetGameState(State_Menu);
 
 	gameController.InGameTime = 0.0;
@@ -99,7 +97,6 @@ void GameClass::MenuLogic(){
 	}
 	MenuObj.INMenuLogic();
 	SetBounceTime(0.11);
-
 }
 void GameClass::InGameLogic(){
 	if (KeyBounceTime>elapsedTime){
@@ -111,7 +108,7 @@ void GameClass::InGameLogic(){
 	}
 	//DEBUG: Change Level
 	if (keyPressed[Key_Space]){
-		gameController.AddLevel();
+		curLevel++;
 	}
 	SetBounceTime(0.085);
 	playerChar.CharacterMovement();
@@ -134,10 +131,9 @@ void GameClass::RenderMenu(){
 	MenuObj.INMenuRender();
 }
 void GameClass::RenderInGame(){
-
-	levelGenObj.GenerateLevel(curLevel);//this gets the stage to be generated
+	MapObj.GenerateMap(curLevel);
+//	levelGenObj.GenerateLevel(curLevel);//this gets the stage to be generated
 	playerChar.GenerateCharacter();
-	
 }
 void GameClass::RenderPaused(){
 	PauseMenuObj.PausedMenuRender();

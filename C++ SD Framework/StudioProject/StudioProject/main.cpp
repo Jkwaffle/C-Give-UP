@@ -5,7 +5,7 @@
 
 bool exitGame= false;
 CStopWatch gameTimer;
-const unsigned char gc_ucFPS = 30;
+const unsigned char gc_ucFPS = 60;
 const unsigned int gc_ucFrameTime = 1000 / gc_ucFPS;
 
 void mainLoop();
