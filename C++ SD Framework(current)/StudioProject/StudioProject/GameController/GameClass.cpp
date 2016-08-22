@@ -90,8 +90,7 @@ void ResetGame(){
 	gameController.elapsedTime = 0.0;
 	gameController.deltaTime = 0.0;
 	//Dafault Position
-	playerChar.gameChar.playerPos.X = 14;
-	playerChar.gameChar.playerPos.Y = 57;
+	playerChar.SetStartingPos();
 	
 }
 #pragma region GameLogic Functions
@@ -100,7 +99,7 @@ void GameClass::MenuLogic(){
 		return;
 	}
 	MenuObj.INMenuLogic();
-	SetBounceTime(0.11);
+	SetBounceTime(0.085);
 }
 void GameClass::InGameLogic(){
 	if (KeyBounceTime>elapsedTime){
@@ -109,7 +108,6 @@ void GameClass::InGameLogic(){
 	//Check If player Paused
 	if (keyPressed[Key_Escape]) {
 		gameController.SetGameState(State_Paused);
-		SetBounceTime(0.4f);
 	}
 	//DEBUG: Change Level
 	
@@ -125,10 +123,8 @@ void GameClass::PausedLogic(){
 	{
 		return;
 	}
-	
 	PauseMenuObj.PausedMenuLogic();
-	SetBounceTime(0.4f);
-	//SetBounceTime(0.11);
+	SetBounceTime(0.11);
 }
 #pragma endregion
 
@@ -138,7 +134,6 @@ void GameClass::RenderMenu(){
 }
 void GameClass::RenderInGame(){
 	MapObj.GenerateMap(curLevel);
-//	levelGenObj.GenerateLevel(curLevel);//this gets the stage to be generated
 	playerChar.GenerateCharacter();
 }
 void GameClass::RenderPaused(){
