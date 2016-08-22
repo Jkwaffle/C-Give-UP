@@ -33,6 +33,10 @@
     <Text Include="map\STAGE01.txt" />
     <Text Include="map\STAGE03.txt" />
     <Text Include="map\STAGE02.txt" />
+    <Text Include="Text\Menu-credits.txt" />
+    <Text Include="Text\Menu-quit.txt" />
+    <Text Include="Text\Menu-start.txt" />
+    <Text Include="Text\You Gaveup.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{63F64C60-91A0-497E-BB4D-489E752D1B6C}</ProjectGuid>

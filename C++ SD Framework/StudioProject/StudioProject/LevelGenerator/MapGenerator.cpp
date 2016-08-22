@@ -15,15 +15,15 @@ char level[HEIGHT][WIDTH];
 
 MapGenerator MapGenRef;
 //Gets Level to make map
-COORD MapGenerator::nextlevel(){
+COORD MapGenerator::nextlevel() {
 	COORD temp;
 	temp.X = 102;
 	temp.Y = 57;
 
 	return temp;
 }
-void MapGenerator::GenerateMap(int lvlIndex){
-	switch (lvlIndex){
+void MapGenerator::GenerateMap(int lvlIndex) {
+	switch (lvlIndex) {
 	case 0:
 		MapGenerator::BufferMap("map/STAGE01.txt");
 		MapGenerator::wallpos("map/STAGE01.txt");
@@ -45,8 +45,38 @@ void MapGenerator::GenerateMap(int lvlIndex){
 		break;
 	}
 }
+
+void MapGenerator::GenerateMenu(std::string index) {
+	switch (index) {
+	case "start":
+		MapGenerator::BufferMap("map/STAGE01.txt");
+		MapGenerator::wallpos("map/STAGE01.txt");
+		//return "map/STAGE01.txt";
+		break;
+	case "credits":
+		MapGenerator::BufferMap("map/STAGE02.txt");
+		MapGenerator::wallpos("map/STAGE02.txt");
+		//return "map/STAGE02.txt";
+		break;
+	case "quit":
+		MapGenerator::BufferMap("map/STAGE03.txt");
+		MapGenerator::wallpos("map/STAGE03.txt");
+		//return"map/STAGE03.txt";
+		break;
+	case "over":
+		MapGenerator::BufferMap("map/STAGE03.txt");
+		MapGenerator::wallpos("map/STAGE03.txt");
+		//return"map/STAGE03.txt";
+		break;
+	default:
+		MapGenerator::BufferMap("error");
+		//return"error";
+		break;
+	}
+}
+
 // Saves wall positions
-vector<COORD> MapGenerator::wallpos(std::string Stage){
+vector<COORD> MapGenerator::wallpos(std::string Stage) {
 	ifstream file;
 	file.open(Stage);
 	if (file.is_open())
@@ -87,8 +117,8 @@ vector<COORD> MapGenerator::wallpos(std::string Stage){
 	return temp;
 }
 //Creates Map
-void MapGenerator::BufferMap(std::string Stage){
-	GameClass gameController;
+void MapGenerator::BufferMap(std::string Stage) {
+	
 	COORD disp;//positions the map
 	COORD c;
 
@@ -136,6 +166,10 @@ void MapGenerator::BufferMap(std::string Stage){
 			else if (level[j][i] == 'x')
 			{
 				GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
+			}
+			else
+			{
+				GameClass::gameConsole.writeToBuffer(c, level[j][i], 0x2B);
 			}
 		}
 	}

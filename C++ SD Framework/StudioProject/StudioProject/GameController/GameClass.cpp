@@ -111,9 +111,7 @@ void GameClass::InGameLogic(){
 		gameController.SetGameState(State_Paused);
 	}
 	//DEBUG: Change Level
-	if (keyPressed[Key_Space]){
-		curLevel++;
-	}
+	
 	SetBounceTime(0.085);
 	playerChar.CharacterMovement();
 }

@@ -73,5 +73,9 @@
     <Text Include="map\STAGE01.txt" />
     <Text Include="map\STAGE02.txt" />
     <Text Include="map\STAGE03.txt" />
+    <Text Include="Text\You Gaveup.txt" />
+    <Text Include="Text\Menu-start.txt" />
+    <Text Include="Text\Menu-quit.txt" />
+    <Text Include="Text\Menu-credits.txt" />
   </ItemGroup>
 </Project>
