@@ -66,16 +66,6 @@ public:
 	void AddLevel(){
 		curLevel++;
 	}
-
-	/*int getCurLevel(){
-		return curLevel;
-	}*/
-	/*void SetLevel(int lvl){
-		curLevel = lvl;
-	}
-	void AddLevel(){
-		curLevel++;
-	}*/
 	GameState curGameState(){
 		return gamestate;
 	}

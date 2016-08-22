@@ -23,10 +23,10 @@ int curLevel = 0;
 
 void Init(){
 	gameController.SetGameState(State_Menu);
-<<<<<<< HEAD
-=======
+
+
 	//GameClass::curGameState = State_Menu;
->>>>>>> origin/master
+
 	gameController.elapsedTime = 0.0;
 	gameController.deltaTime = 0.0;
 }

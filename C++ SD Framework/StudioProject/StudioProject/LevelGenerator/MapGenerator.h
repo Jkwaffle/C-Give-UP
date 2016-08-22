@@ -12,6 +12,6 @@ public:
 
 	void BufferMap(std::string Stage);
 	static vector<COORD> wallpos(std::string Stage);
-
+	static COORD nextlevel();
 };
 

@@ -15,6 +15,13 @@ char level[HEIGHT][WIDTH];
 
 MapGenerator MapGenRef;
 //Gets Level to make map
+COORD MapGenerator::nextlevel(){
+	COORD temp;
+	temp.X = 102;
+	temp.Y = 57;
+
+	return temp;
+}
 void MapGenerator::GenerateMap(int lvlIndex){
 	switch (lvlIndex){
 	case 0:
@@ -120,8 +127,6 @@ void MapGenerator::BufferMap(std::string Stage){
 			}
 			else if (level[j][i] == '>')
 			{
-				gameController.AddLevel();
-				//gameController.AddLevel();
 				GameClass::gameConsole.writeToBuffer(c, '>');
 			}
 			else if (level[j][i] == 'w')

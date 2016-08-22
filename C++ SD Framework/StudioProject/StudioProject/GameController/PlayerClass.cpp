@@ -4,6 +4,7 @@
 #include "../LevelGenerator/MapGenerator.h"
 
 extern MapGenerator MapGenRef;
+extern GameClass gameController;
 
 PlayerClass::PlayerClass(){
 	SetStartingPos();
@@ -52,6 +53,12 @@ void PlayerClass::CharacterMovement(){
 			}
 		}
 	}
+	if (gameChar.playerPos.X == MapGenRef.nextlevel().X && gameChar.playerPos.Y == MapGenRef.nextlevel().Y)
+	{
+		gameController.AddLevel();
+		PlayerClass::SetStartingPos();
+	}
+
 }
 
 void PlayerClass::GenerateCharacter(){
@@ -63,10 +70,6 @@ void PlayerClass:: CharacterKilled(){
 
 	PlayerClass::SetStartingPos();
 }
-void PlayerClass::GenerateCharacter(){
-	
-	PlayerClass::SetStartingPos();
-
-
-
-}
+//void PlayerClass::GenerateCharacter(){
+	//PlayerClass::SetStartingPos();
+//}
