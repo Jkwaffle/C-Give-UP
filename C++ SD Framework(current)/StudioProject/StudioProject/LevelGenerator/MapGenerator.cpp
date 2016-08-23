@@ -91,7 +91,6 @@ vector<COORD> MapGenerator::wallpos(std::string Stage) {
 				}
 			}
 		}
-
 	}
 	file.close();
 	vector<COORD> temp;
@@ -114,7 +113,82 @@ vector<COORD> MapGenerator::wallpos(std::string Stage) {
 	}
 	return temp;
 }
-//saves danger wall positions
+//saves danger wall position
+
+vector<wallInfo> MapGenerator::boostWalls(string Stage){
+	ifstream file;
+	file.open(Stage);
+	if (file.is_open())
+	{
+		while (file.good())
+		{
+			for (int y = 0; y < HEIGHT; y++)
+			{
+				for (int x = 0; x < WIDTH; x++)
+				{
+					file >> level[y][x];
+				}
+			}
+		}
+	}
+	file.close();
+	vector<wallInfo> temp;
+	COORD disp;//positions the map
+	disp.X = 13;
+	disp.Y = 23;
+	temp.clear();
+
+	for (int j = 0; j < HEIGHT; j++)
+	{
+		for (int i = 0; i < WIDTH; i++)
+		{//OPTIMIZE: Do switch case instead
+			if (level[j][i] == '>')//store Info for boost
+			{
+				wallInfo temp_boost;
+				temp_boost.pos.X = i + 13;
+				temp_boost.pos.Y = j + 23;
+				temp_boost.direction = dir_Right;
+				temp.push_back(temp_boost);
+			}
+			else if (level[j][i] == '<')//store Info for boost
+			{
+				wallInfo temp_boost;
+
+
+				temp_boost.pos.X = i + 13;
+				temp_boost.pos.Y = j + 23;
+				temp_boost.direction = dir_Left;
+
+				temp.push_back(temp_boost);
+			}
+			else if (level[j][i] == '^')//store Info for boost
+			{
+				wallInfo temp_boost;
+
+
+				temp_boost.pos.X = i + 13;
+				temp_boost.pos.Y = j + 23;
+				temp_boost.direction = dir_Up;
+
+				temp.push_back(temp_boost);
+			}
+			else if (level[j][i] == 'v')//store Info for boost
+			{
+				wallInfo temp_boost;
+
+
+				temp_boost.pos.X = i + 13;
+				temp_boost.pos.Y = j + 23;
+				temp_boost.direction = dir_Down;
+
+				temp.push_back(temp_boost);
+			}
+		}
+	}
+	return temp;
+
+
+}
 vector<COORD> MapGenerator::dangerwallpos(std::string Stage){
 	ifstream file;
 	file.open(Stage);
@@ -153,6 +227,51 @@ vector<COORD> MapGenerator::dangerwallpos(std::string Stage){
 	}
 	return temp;
 }
+
+
+vector<wallInfo> MapGenerator::teleportBlocks(std::string Stage) {
+	ifstream file;
+	file.open(Stage);
+	if (file.is_open())
+	{
+		while (file.good())
+		{
+			for (int y = 0; y < HEIGHT; y++)
+			{
+				for (int x = 0; x < WIDTH; x++)
+				{
+					file >> level[y][x];
+				}
+			}
+		}
+	}
+	file.close();
+	vector<wallInfo> temp;
+	COORD disp;//positions the map
+	disp.X = 13;
+	disp.Y = 23;
+	temp.clear();
+	wallInfo temp_teleBlocks;
+	for (int j = 0; j < HEIGHT; j++)
+	{
+		for (int i = 0; i < WIDTH; i++)
+		{
+			if (level[j][i] == 't')//stores position of wall
+			{
+				temp_teleBlocks.pos.X = i + 13;
+				temp_teleBlocks.pos.Y = j + 23;
+			}
+			if (level[j][i] == 'T')
+			{
+				temp_teleBlocks.teleTarget.X = i + 13;
+				temp_teleBlocks.teleTarget.Y = j + 23;
+			}
+		}
+	}
+	temp.push_back(temp_teleBlocks);
+	return temp;
+}
+
 //Creates Map
 
 void MapGenerator::BufferMap(std::string Stage, bool inGame) {
@@ -196,9 +315,9 @@ void MapGenerator::BufferMap(std::string Stage, bool inGame) {
 				{
 					GameClass::gameConsole.writeToBuffer(c, ' ');
 				}
-				else if (level[j][i] == '>')//to next level
+				else if (level[j][i] == 'p')//to next level
 				{
-					GameClass::gameConsole.writeToBuffer(c, '>');
+					GameClass::gameConsole.writeToBuffer(c, 'p');
 				}
 				else if (level[j][i] == 'w')//danger wall(have collision)
 				{
@@ -212,8 +331,38 @@ void MapGenerator::BufferMap(std::string Stage, bool inGame) {
 				{
 					GameClass::gameConsole.writeToBuffer(c, ' ', 0x2B);
 				}
+
+				else if (level[j][i] == '>')//store Info for boost
+				{
+					GameClass::gameConsole.writeToBuffer(c, '>', 0x3C);
+				}
+				else if (level[j][i] == '<')//store Info for boost
+				{
+					GameClass::gameConsole.writeToBuffer(c, '<', 0x3C);
+				}
+				else if (level[j][i] == '^')//store Info for boost
+				{
+					GameClass::gameConsole.writeToBuffer(c, '^', 0x3C);
+				}
+				else if (level[j][i] == 'v')//store Info for boost
+				{
+					GameClass::gameConsole.writeToBuffer(c, 'V', 0x3C);
+				}
+				else if (level[j][i] == 't')//store Info for boost
+				{
+					GameClass::gameConsole.writeToBuffer(c, ' ', 0x6F);
+				}
+				else if (level[j][i] == 'T')//store Info for boost
+				{
+					GameClass::gameConsole.writeToBuffer(c, ' ', 0x5E);
+				}
+
+
+
+
+
 			}
-			else{
+			else{	//For Menu
 				if (level[j][i] == '.')//the floor
 				{
 					GameClass::gameConsole.writeToBuffer(c, ' ');

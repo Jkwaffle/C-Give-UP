@@ -120,12 +120,13 @@ void GameClass::InGameLogic(){
 	playerChar.CharacterMovement();
 }
 void GameClass::GameOverLogic(){
+
 	if (KeyBounceTime>elapsedTime){
 		return;
 	}
-	
+	SetBounceTime(2.0f);
 	afterGameObj.GameOverLogic();
-	SetBounceTime(5.0f);
+	
 }
 void GameClass::PausedLogic(){
 	

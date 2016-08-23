@@ -48,6 +48,9 @@
     <ClCompile Include="MenuControllers\GameOverController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BlockClasses\BlockFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuControllers\GameOverController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockClasses\BlockFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

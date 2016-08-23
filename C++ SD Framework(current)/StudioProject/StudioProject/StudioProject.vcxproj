@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlockClasses\BlockFunctions.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="GameController\PlayerClass.cpp" />
@@ -22,6 +23,7 @@
     <ClCompile Include="MenuControllers\PausedMenuController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlockClasses\BlockFunctions.h" />
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="GameController\PlayerClass.h" />
